@@ -2,7 +2,7 @@ from PIL import Image, ImageOps
 import matplotlib.pyplot as plt
 
 
-def BrezenhemLine(image, x0, y0, x1, y1, collor):
+def BrezenhemLine(image, x0, y0, x1, y1, color):
     # Считаем разницу между начальными и конечными координатами отдельно для 'х' и 'y'
     delta_x = abs(x1 - x0)
     delta_y = abs(y1 - y0)
@@ -27,10 +27,10 @@ def BrezenhemLine(image, x0, y0, x1, y1, collor):
 
     for x in range(x0, x1 + 1):
         if reverse == True:
-            image.putpixel((y0, x), collor)
+            image.putpixel((y0, x), color)
 
         else:
-            image.putpixel((x, y0), collor)
+            image.putpixel((x, y0), color)
         epsilon = epsilon + 2 * delta_y
 
         if epsilon >= delta_x:
@@ -72,7 +72,7 @@ def Test_Lines():  # Ручная проверка линий с различн�
 
 
 def Custom_Line():
-    collor = (255, 255, 255)  # Задаем белый цвет для линии
+    color = (255, 255, 255)  # Задаем белый цвет для линии
 
     print('Поле будет иметь размеры [size x size], '
           'следите, что бы координаты отрезка были натуральными, меньше, чем size')
@@ -94,7 +94,7 @@ def Custom_Line():
         size_y = y1 + 10
 
     image = Image.new('RGB', (size_x, size_y))  # Задаём параметры поля
-    BrezenhemLine(image, x0, y0, x1, y1, collor)  # Строим линию по введённым координатам
+    BrezenhemLine(image, x0, y0, x1, y1, color)  # Строим линию по введённым координатам
 
     image = ImageOps.flip(image)  # Переворачиваем поле относительно горизонтальной оси
     plt.figure('Custom lines')  # Задаём название окну с линией
